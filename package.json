@@ -15,7 +15,8 @@
     "webpack-watch": "./node_modules/webpack/bin/webpack.js --progress --colors --watch",
     "webpack-production": "./node_modules/webpack/bin/webpack.js --colors --config webpack.config.prod",
     "webpack:deploy": "webpack --config=webpack/webpack.config.js -p",
-    "heroku-postbuild": "npm run webpack:deploy"
+    "heroku-postbuild": "npm run webpack:deploy",
+    "postinstall": "cd client && npm install"
   },
   "private": true,
   "dependencies": {
