@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, Switch, Route } from 'react-router-dom';
-// import Login from '../../components/Login';
 import axios from 'axios';
 import ReactFC from 'react-fusioncharts';
 import fusioncharts from 'fusioncharts';

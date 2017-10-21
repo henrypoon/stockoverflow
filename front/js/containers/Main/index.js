@@ -15,11 +15,11 @@ export default class Main extends React.Component {
         <Nav path={this.props.location.pathname} />
         <div className='content'>
             <Switch>
-                <Route exact path='/' render={() => <Redirect to='/Search'/>} />
-                    <Route path='/home' component={Home} />
-                    <Route path='/search' component={SearchStock} />
-                    <Route path='/history' component={History} />
-                    <Route path='/stock/:stockID' component={SearchResult} />
+              <Route exact path='/' render={() => <Redirect to='/Search'/>} />
+              <Route path='/home' component={Home} />
+              <Route path='/search' component={SearchStock} />
+              <Route path='/history' component={History} />
+              <Route path='/stock/:stockID' component={SearchResult} />
             </Switch>
         </div>
       </div>

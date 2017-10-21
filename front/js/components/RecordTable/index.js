@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link, Switch, Route } from 'react-router-dom';
-import axios from 'axios';
 import { Table } from 'semantic-ui-react';
 import './RecordTable.css';
 import PropTypes from 'prop-types';
@@ -43,9 +40,6 @@ export default class StockChart extends Component {
 		);
 	}
 }
-
-
-
 
 StockChart.propTypes = {
   records: PropTypes.array

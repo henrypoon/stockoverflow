@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, Switch, Route } from 'react-router-dom';
-import axios from 'axios';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Sidebar, Segment, Button, Menu, Image, Icon, Header } from 'semantic-ui-react';
 
@@ -11,13 +10,16 @@ import { Sidebar, Segment, Button, Menu, Image, Icon, Header } from 'semantic-ui
   };
 })
 export default class Nav extends Component {
-  state = { visible: false }
+  constructor(props) {
+    super(props);
+    this.state = {
+      visible: false
+    };
+  }
 
   toggleVisibility = () => this.setState({ visible: !this.state.visible })
 
   render() {
-    console.log(this.props);
-    const { visible } = this.state;
     return (
       <div>
         <Sidebar.Pushable as={Segment}>

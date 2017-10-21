@@ -21,7 +21,7 @@ export default function reducer(state = default_state, action) {
           balance: action.remainBalance,
           record: action.record,
           hold: action.hold
-        }
+        };
       }
     }
     return state;

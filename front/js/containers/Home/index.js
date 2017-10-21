@@ -1,15 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import StockChart from '../../components/StockChart';
 import { bounce } from 'react-animations';
 import Radium, {StyleRoot} from 'radium';
-import { Header, Icon, Image } from 'semantic-ui-react';
+import { Header, Icon } from 'semantic-ui-react';
 import './Home.css';
 
-@connect((store) => {
-  return store.home.first;
-})
 export default class Home extends React.Component {
 	
 	constructor (props) {
