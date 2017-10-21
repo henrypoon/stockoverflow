@@ -14,4 +14,3 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-//= require react_rails_img
