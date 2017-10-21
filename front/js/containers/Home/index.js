@@ -5,6 +5,7 @@ import StockChart from '../../components/StockChart';
 import { bounce } from 'react-animations';
 import Radium, {StyleRoot} from 'radium';
 import { Header, Icon, Image } from 'semantic-ui-react';
+import './Home.css';
 
 @connect((store) => {
   return store.home.first;
@@ -17,7 +18,7 @@ export default class Home extends React.Component {
 
   render () {
     return (
-      <div className='front-page' onClick={() => console.log('hey')}>
+      <div className='front-page'>
         <StyleRoot>
           <div style={styles.bounce}>
             <Header as='h2' icon textAlign='center'>

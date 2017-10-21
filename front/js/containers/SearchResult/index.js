@@ -16,16 +16,29 @@ export default class SearchResult extends React.Component {
     };
   }
 
+  setOpen = () => {
+    this.setState({
+      modal: true
+    });
+    console.log(this.state, 'open');
+  }
+
+  setClose = () => {
+    this.setState({
+      modal: false
+    });
+  }
+
   render () {
     const stockID = this.props.match.params.stockID;
     return (
       <div>
         <h1 className='center'>Recent Price of {stockID}</h1>
         <div>
-          <TradeModal stockID={stockID} />
+          <TradeModal stockID={stockID} isOpen={this.state.modal} setOpen={this.setOpen} setClose={this.setClose}/>
         </div>
         <StockChart stockID={stockID} />
-        <TradeButton stockID={stockID} />
+        <TradeButton stockID={stockID} isOpen={this.state.modal} setOpen={this.setOpen} setClose={this.setClose}/>
       </div>
     );
   }

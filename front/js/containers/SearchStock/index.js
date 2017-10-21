@@ -22,7 +22,6 @@ export default class SearchStock extends Component {
     };
   }
 
-
   componentWillMount() {
     this.resetComponent();
   }
@@ -78,20 +77,19 @@ export default class SearchStock extends Component {
     const { isLoading, value, results } = this.state;
 
     return (
-      <div className='SearchStock'>
+      <div className='center'>
         <StyleRoot>
           <div style={styles.bounce}>
-            <Header as='h2' icon textAlign='center'>
+            <Header as='h2' icon>
               <Icon name='users' circular />
               <Header.Content>
                 Search
               </Header.Content>
             </Header>
-            <div textAlign='center'>
-              <Grid textAlign='center'>
-                <Grid.Column width={16} textAlign='center'>
+            <div>
+              <Grid>
+                <Grid.Column width={16}>
                   <Search 
-                    textAlign='center'
                     loading={isLoading}
                     onResultSelect={this.handleResultSelect}
                     onSearchChange={this.handleSearchChange}

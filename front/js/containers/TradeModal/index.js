@@ -11,10 +11,10 @@ export default class TradeModal extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      open: false, 
       quantity: 0,
       balance: this.props.user.balance
     };
+    console.log(this.props);
   }  
 
   handleAdd = () => {
@@ -38,23 +38,18 @@ export default class TradeModal extends Component {
     });
   }
 
-  show = size => () => this.setState({ size, open: true })
   close = () => this.setState({ open: false })
 
   render() {
-    const { open, size } = this.state;
-
     return (
       <div>
-        <Button onClick={this.show('large')}>Small</Button>
-
-        <Modal size={size} open={open} onClose={this.close}>
+        <Modal size='large' open={this.props.isOpen} onClose={this.props.setClose}>
           <Modal.Header>
             Trade Board
           </Modal.Header>
           <Modal.Content>
             <p>Are you going to buy this stock</p>
-            <div>
+            <div className='center'>
               <Statistic>
                 <Statistic.Label>Price per stock</Statistic.Label>
                 <Statistic.Value>${this.props.search.price}</Statistic.Value>
@@ -65,7 +60,7 @@ export default class TradeModal extends Component {
               </Statistic>
               <Statistic>
                 <Statistic.Label>Quantity</Statistic.Label>
-                <Statistic.Value>${this.state.quantity}</Statistic.Value>
+                <Statistic.Value>{this.state.quantity}</Statistic.Value>
               </Statistic>
               <Button.Group>
                 <Button disabled={this.state.quantity === 0} icon='minus' onClick={this.handleRemove} />
@@ -79,13 +74,13 @@ export default class TradeModal extends Component {
                 balance: this.props.user.balance,
                 quantity: 0
               });
-              this.close();
+              this.props.setClose();
             }}>
               No
             </Button>
             <Button positive icon='checkmark' labelPosition='right' content='Yes' onClick={() => {
               this.props.dispatch(sell(this.props.stockID, this.state.balance));
-              this.close();
+              this.props.setClose();
               this.setState({
                 balance: this.props.user.balance,
                 quantity: 0
@@ -104,5 +99,7 @@ TradeModal.propTypes = {
   balance: PropTypes.string,
   stockID: PropTypes.string,
   search: PropTypes.object,
-  price: PropTypes.integer
+  price: PropTypes.integer,
+  isOpen: PropTypes.bool,
+  setClose: PropTypes.function
 };

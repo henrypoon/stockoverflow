@@ -43,13 +43,13 @@ export default class StockChart extends Component {
 		.then((response) => {
 			console.log(response);
 			this.props.dispatch(setCurrPrice(this.props.stockID, response.data.data[0].open));
-			const category = response.data.data.map((e) => {
-				return {'label': e.date.toString()};
+			const category = response.data.data.reverse().map((e) => {
+				return {'label': e.date.replace('2017-', '')};
 			});
 			let categories = [];
 			categories.push({'category': category});
 			// console.log(categories);
-			const data = response.data.data.map((e) => {
+			const data = response.data.data.reverse().map((e) => {
 				return {'value': e.open.toString()};
 			});
 			let dataset = [];
