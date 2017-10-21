@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, Switch, Route } from 'react-router-dom';
-// import Login from '../../components/Login';
-import NotificationSystem from 'react-notification-system';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Sidebar, Segment, Button, Menu, Image, Icon, Header } from 'semantic-ui-react';
 
-
+@connect((store) => {
+  return {
+    balance: store.user.balance
+  };
+})
 export default class Nav extends Component {
   state = { visible: false }
 
   toggleVisibility = () => this.setState({ visible: !this.state.visible })
 
   render() {
+    console.log(this.props);
     const { visible } = this.state;
     return (
       <div>
@@ -26,16 +29,19 @@ export default class Nav extends Component {
               </Link>
             </Menu.Item>
             <Menu.Item name='Search'>
-              <Link to='/Search'>
+              <Link to='/search'>
               <Icon name='bar graph' />
               Search
               </Link>
             </Menu.Item>
             <Menu.Item name='History'>
-              <Link to='/History'>
+              <Link to='/history'>
               <Icon name='tasks' />
               History
               </Link>
+            </Menu.Item>
+            <Menu.Item name='balance'>
+              Asset Balance: ${this.props.balance}
             </Menu.Item>
           </Sidebar>
           <Sidebar.Pusher>
@@ -48,4 +54,8 @@ export default class Nav extends Component {
     );
   }
 }
+
+Nav.propTypes = {
+  balance: PropTypes.integer
+};
 

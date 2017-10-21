@@ -13,9 +13,15 @@ export default class TradeButton extends React.Component {
     return (
       <div>
         <Segment padded>
-          <Button primary fluid onClick={()=> this.props.setOpen()}>Buy</Button>
+          <Button primary fluid onClick={()=> {
+            this.props.setOpen();
+            this.props.setTradeMode('buy');
+          }}>Buy</Button>
           <Divider horizontal>Or</Divider>
-          <Button secondary fluid onClick={()=> this.props.setOpen()}>Sell</Button>
+          <Button secondary fluid onClick={()=> {
+            this.props.setOpen();
+            this.props.setTradeMode('sell');
+          }}>Sell</Button>
         </Segment>
       </div>
     );
@@ -24,5 +30,6 @@ export default class TradeButton extends React.Component {
 
 TradeButton.propTypes = {
   stockID: PropTypes.string,
-  setOpen: PropTypes.function
+  setOpen: PropTypes.function,
+  setTradeMode: PropTypes.function
 };

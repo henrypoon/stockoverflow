@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import RecordTable from '../../components/RecordTable';
 import { bounce } from 'react-animations';
 import Radium, {StyleRoot} from 'radium';
-import { Header, Icon, Image } from 'semantic-ui-react';
+import { Header, Icon } from 'semantic-ui-react';
 import './History.css';
 
 @connect((store) => {
@@ -32,11 +32,16 @@ export default class History extends React.Component {
             </Header>
           </div>
         </StyleRoot>
-        <RecordTable />
+        <RecordTable records={this.props.user.record} />
       </div>
     );
   }
 }
+
+History.propTypes = {
+  record: PropTypes.array,
+  user: PropTypes.object,
+};
 
 const styles = {
   bounce: {

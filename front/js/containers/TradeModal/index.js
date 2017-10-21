@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, Statistic, Image, List, Transition } from 'semantic-ui-react';
+import { Button, Modal, Statistic} from 'semantic-ui-react';
 import { sell, buy } from '../../actions/tradeActions';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -15,20 +15,19 @@ export default class TradeModal extends Component {
       quantity: 0,
       balance: this.props.user.balance
     };
-    console.log(this.props);
   }  
 
   handleAdd = () => {
     this.setState({ 
       quantity: this.state.quantity + 1,
-      balance: Math.round(this.state.balance - this.props.search.price, 2)
+      balance: this.props.tradeMode === 'buy' ? Math.round(this.state.balance - this.props.search.price, 2): Math.round(this.state.balance + this.props.search.price, 2)
     });
   }
   
   handleRemove = () => {
     this.setState({ 
       quantity: this.state.quantity - 1,
-      balance: Math.round(this.state.balance + this.props.search.price, 2)
+      balance: this.props.tradeMode === 'buy' ? Math.round(this.state.balance + this.props.search.price, 2): Math.round(this.state.balance - this.props.search.price, 2)
     });
   }
 
@@ -56,17 +55,25 @@ export default class TradeModal extends Component {
                 <Statistic.Value>${this.props.search.price}</Statistic.Value>
               </Statistic>
               <Statistic>
-                <Statistic.Label>Balance</Statistic.Label>
+                <Statistic.Label>Remain Balance</Statistic.Label>
                 <Statistic.Value>${this.state.balance}</Statistic.Value>
               </Statistic>
               <Statistic>
                 <Statistic.Label>Quantity</Statistic.Label>
                 <Statistic.Value>{this.state.quantity}</Statistic.Value>
               </Statistic>
-              <Button.Group>
-                <Button disabled={this.state.quantity === 0} icon='minus' onClick={this.handleRemove} />
-                <Button disabled={this.state.quantity === 20} icon='plus' onClick={this.handleAdd} />
-              </Button.Group>
+              { this.props.tradeMode === 'buy' ? (
+                <Button.Group>
+                  <Button disabled={this.state.quantity === 0} icon='minus' onClick={this.handleRemove} />
+                  <Button disabled={this.state.balance - this.props.search.price < 0} icon='plus' onClick={this.handleAdd} />
+                </Button.Group>
+                ) : (
+                  <Button.Group>
+                    <Button disabled={this.state.quantity === 0} icon='minus' onClick={this.handleRemove} />
+                    <Button disabled={!this.props.user.hold[this.props.stockID] || this.props.user.hold[this.props.stockID] === 0 } icon='plus' onClick={this.handleAdd} />
+                  </Button.Group>
+                )
+              }
             </div>
           </Modal.Content>
           <Modal.Actions>
@@ -80,12 +87,21 @@ export default class TradeModal extends Component {
               No
             </Button>
             <Button positive icon='checkmark' labelPosition='right' content='Yes' onClick={() => {
-              this.props.dispatch(sell(this.props.stockID, this.state.balance));
-              this.props.setClose();
-              this.setState({
-                balance: this.state.balance,
-                quantity: 0
-              });
+              if (this.props.tradeMode === 'buy') {
+                this.props.dispatch(buy(this.props.stockID, this.state.balance, this.state.quantity));
+                this.props.setClose();
+                this.setState({
+                  balance: this.state.balance,
+                  quantity: 0
+                });
+              } else {
+                this.props.dispatch(sell(this.props.stockID, this.state.balance, this.state.quantity));
+                this.props.setClose();
+                this.setState({
+                  balance: this.state.balance,
+                  quantity: 0
+                });
+              }
             }}/>
           </Modal.Actions>
         </Modal>
@@ -102,5 +118,6 @@ TradeModal.propTypes = {
   search: PropTypes.object,
   price: PropTypes.integer,
   isOpen: PropTypes.bool,
-  setClose: PropTypes.function
+  setClose: PropTypes.function,
+  tradeMode: PropTypes.string
 };

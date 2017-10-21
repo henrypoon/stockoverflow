@@ -1,7 +1,6 @@
 import _ from 'lodash';
-import faker from 'faker';
 import React, { Component } from 'react';
-import { Search, Grid, Header, Icon, Image } from 'semantic-ui-react';
+import { Search, Grid, Header, Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { bounce } from 'react-animations';
 import Radium, {StyleRoot} from 'radium';
@@ -42,7 +41,6 @@ export default class SearchStock extends Component {
       }
     })
     .then((response) => {
-      console.log(response);
       if (response.data.data.length > 0) {
         source.push({
           title: this.state.value,
@@ -56,14 +54,6 @@ export default class SearchStock extends Component {
 
     setTimeout(() => {
       if (this.state.value.length < 1) return this.resetComponent();
-
-      // let url = 'http://d.yimg.com/aq/autoc?query=' + this.state.value + '&region=US&lang=en-US&callback=YAHOO.util.ScriptNodeDataSource.callbacks';
-
-      // const source = _.times(5, () => ({
-      //   title: faker.company.companyName(),
-      //   description: faker.company.catchPhrase(),
-      //   price: faker.finance.amount(0, 100, 2, '$'),
-      // }));
       const re = new RegExp(_.escapeRegExp(this.state.value), 'i');
       const isMatch = result => re.test(result.title);
       this.setState({

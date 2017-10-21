@@ -10,13 +10,17 @@ export default function reducer(state = default_state, action) {
 			case 'SELL_STOCK': {
 				return {
 					...state,
-					balance: action.remainBalance
+					balance: action.remainBalance,
+          record: action.record,
+          hold: action.hold
 				};
 			}
       case 'BUY_STOCK':{
         return {
           ...state,
-          balance: action.remainBalance
+          balance: action.remainBalance,
+          record: action.record,
+          hold: action.hold
         }
       }
     }
