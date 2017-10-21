@@ -1,0 +1,25 @@
+{
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "amd": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": ["react"],
+  "rules": {
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["warn", "single"],
+    "semi": ["warn", "always"],
+    "no-cond-assign": ["warn", "always"],
+    "no-unused-vars": ["warn", {"argsIgnorePattern": "state|action|dispatch"}],
+    "no-console": "off",
+    "no-extra-boolean-cast": "off",
+  }
+}

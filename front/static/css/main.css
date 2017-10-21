@@ -1,0 +1,324 @@
+body {
+  font-size: 14px;
+  font-family: "Open Sans", sans-serif;
+  background-color: #f8f8f8;
+}
+
+body::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+ul {
+	list-style: none;
+  padding-left: 0;
+}
+
+a {
+  color: #ffffff;
+
+  text-decoration: none;
+}
+
+input {
+  font-family: "Open Sans", sans-serif;
+}
+
+.side-nav {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 55px;
+  width: 220px;
+  background-color:  #4d4d4d;
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+}
+
+.side-nav .active > a {
+  box-shadow: inset 5px 0 0 #7f8184;
+  background-color: #33383e;
+  text-decoration: none;
+}
+
+.side-nav > ul > li > a {
+  padding: 20px 15px;
+  display: block;
+  text-align: left;
+  border-bottom: none;
+  color: #ffffff;
+}
+
+.side-nav .user {
+  border-bottom: 1px #7f8184 solid;
+  margin: 0 5px 10px 5px;
+  color: white;
+  padding: 20px 10px;
+}
+
+.side-nav li.user a {
+  padding: 0;
+  background-color: none;
+}
+
+.side-nav li:hover > a {
+  background-color: #33383e;
+  text-decoration: none;
+}
+
+.content {
+  margin: 55px 0 0 230px;
+  padding: 30px 60px;
+}
+
+.sidebar {
+  text-transform: capitalize;
+}
+
+.icon {
+  height: 14px;
+  position: relative;
+  bottom: 2px;
+  margin-right: 7px;
+}
+
+.sidebar-icon {
+  height: 23px;
+  position: relative;
+  bottom: 2px;
+  margin-right: 20px;
+}
+
+.user-icon {
+  height: 50px;
+  float: left;
+}
+
+.user-detail {
+  margin-left: 60px;
+  height: 50px;
+  font-weight: 700;
+}
+
+.login .logout {
+  font-size: 10px;
+  opacity: 0.5;
+}
+
+.login:hover, .logout:hover {
+  color: #ffffff;
+  opacity: 0.7;
+}
+
+.login:link, .logout:link {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.login:visited, .logout:visited {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* HEADER */
+.header {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  height: 55px;
+  width: 100%;
+  background:  #4d4d4d;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.header .logo {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 30px;
+  padding-left: 20px;
+  width: 250px;
+  line-height: 55px;
+}
+
+.header .logo a {
+  color: #858585;
+  opacity: 0.7;
+}
+
+.header .logo a:link {
+  text-decoration: none;
+}
+
+.header .logo a:hover {
+  opacity: 1;
+  text-decoration: none;
+}
+
+.header .search-bar {
+  height: 100%;
+  margin-left: 20px;
+  display: inline-block;
+}
+
+.header .search-bar input {
+  height: 100%;
+  width: 300px;
+  font-size: 16px;
+  border: none;
+  border-radius: 0;
+  background-color: #2c3136;
+  color: #ffffff;
+}
+
+.header .search-bar input:focus {
+  outline: none;
+}
+
+.logo-icon, .search-icon {
+  position: relative;
+}
+
+.logo-icon {
+  height: 40px;
+  bottom: 3px;
+  margin-right: 5px;
+}
+
+.search-icon {
+  height: 17px;
+  bottom: 2px;
+}
+
+
+/*search page css*/
+.unswbook {
+    margin-top: 10%;
+    font-size: 70px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.search-bar-int {
+  margin: 20px auto;
+}
+
+.search-bar {
+    margin: auto;
+}
+
+
+/*user profile */
+.white-container{
+  background-color: white;
+  margin: 5px 5px 10px;
+  padding: 10px 15px;
+  border: 1px #e5e5e5 solid;
+  border-radius: 4px;
+}
+
+.white-bg-container{
+  padding:0;
+}
+
+.friendlist{
+  height: 770px;
+}
+
+.postlist{
+  height: 500px;
+  overflow: auto;
+}
+
+.userprofile {
+  height: 250px;
+  padding: 0;
+  overflow: auto;
+}
+
+.backbutton {
+  margin-right: 5px;
+  margin-top: 10px;
+}
+
+.username {
+  display: inline-block;
+  font-size: 25px;
+  padding: 2px 3px;
+}
+
+.panelbody{
+  border: 1px #e5e5e5 solid;
+  border-radius: 4px;
+}
+
+.buttons{
+  display: inline-block;
+  float: right;
+}
+
+.profile-img {
+  height: 140px;
+}
+
+.postlist-username {
+  display: inline;
+  margin-top: 0;
+  font-weight: bold;
+}
+
+.post-content {
+  position: absolute;
+  top: 3px;
+  margin-left: 10px;
+}
+
+.friend-img {
+  height:35px;
+}
+
+.friendlist-title {
+  text-align: center;
+}
+
+.friendlist-body {
+  text-align: center;
+  padding-left: 0;
+}
+
+.friend-a{
+  color:seagreen;
+}
+
+.admin-block{
+  display: inline;
+}
+.admin-button {
+  margin-left:5px;
+}
+
+.uploadimag{
+  font-size: 10px;
+  padding: 0;
+  margin-top: 5px;
+  block-size: 20px;
+}
+
+.adsearch {
+  float: left;
+  margin-left: 36%;
+}
+
+.warningstyle{
+	font-size: 20px;
+	float: left;
+}
+
+.activity {
+  margin:0;
+}
