@@ -2,6 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import RecordTable from '../../components/RecordTable';
+import { bounce } from 'react-animations';
+import Radium, {StyleRoot} from 'radium';
+import { Header, Icon, Image } from 'semantic-ui-react';
+import './History.css';
 
 @connect((store) => {
   return {
@@ -17,10 +21,26 @@ export default class History extends React.Component {
   render () {
     console.log(this.props);
     return (
-      <div>
-        <h1>History</h1>
+      <div className='center'>
+        <StyleRoot>
+          <div style={styles.bounce}>
+            <Header as='h2' icon textAlign='center'>
+              <Icon name='tasks' circular />
+              <Header.Content>
+                History
+              </Header.Content>
+            </Header>
+          </div>
+        </StyleRoot>
         <RecordTable />
       </div>
     );
   }
 }
+
+const styles = {
+  bounce: {
+    animation: 'x 1s',
+    animationName: Radium.keyframes(bounce, 'bounce')
+  }
+};

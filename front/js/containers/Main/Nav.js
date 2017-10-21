@@ -27,13 +27,13 @@ export default class Nav extends Component {
             </Menu.Item>
             <Menu.Item name='Search'>
               <Link to='/Search'>
-              <Icon name='camera' />
+              <Icon name='bar graph' />
               Search
               </Link>
             </Menu.Item>
             <Menu.Item name='History'>
               <Link to='/History'>
-              <Icon name='gamepad' />
+              <Icon name='tasks' />
               History
               </Link>
             </Menu.Item>
@@ -41,7 +41,6 @@ export default class Nav extends Component {
           <Sidebar.Pusher>
             <Segment basic>
               <Header as='h3'>Application Content</Header>
-              <Image src='/assets/images/wireframe/paragraph.png' />
             </Segment>
           </Sidebar.Pusher>
         </Sidebar.Pushable>

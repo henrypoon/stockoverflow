@@ -81,7 +81,7 @@ export default class SearchStock extends Component {
         <StyleRoot>
           <div style={styles.bounce}>
             <Header as='h2' icon>
-              <Icon name='users' circular />
+              <Icon name='bar graph' circular />
               <Header.Content>
                 Search
               </Header.Content>

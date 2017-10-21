@@ -3,6 +3,7 @@ import { Button, Modal, Statistic, Image, List, Transition } from 'semantic-ui-r
 import { sell, buy } from '../../actions/tradeActions';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import './TradeModal.css';
 
 @connect((store) => {
   return store;
@@ -82,7 +83,7 @@ export default class TradeModal extends Component {
               this.props.dispatch(sell(this.props.stockID, this.state.balance));
               this.props.setClose();
               this.setState({
-                balance: this.props.user.balance,
+                balance: this.state.balance,
                 quantity: 0
               });
             }}/>
