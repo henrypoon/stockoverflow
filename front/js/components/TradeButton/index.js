@@ -14,13 +14,13 @@ export default class TradeButton extends React.Component {
       <div>
         <Segment padded>
           <Button primary fluid onClick={()=> {
-            this.props.setOpen();
             this.props.setTradeMode('buy');
+            this.props.setOpen();
           }}>Buy</Button>
           <Divider horizontal>Or</Divider>
           <Button secondary fluid onClick={()=> {
-            this.props.setOpen();
             this.props.setTradeMode('sell');
+            this.props.setOpen();
           }}>Sell</Button>
         </Segment>
       </div>

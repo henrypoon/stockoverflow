@@ -1,5 +1,10 @@
 .center {
 	text-align: center;
 	margin-top: 20%;
+	position: relative;
 }
 
+.results {
+	position: relative;
+	margin: auto;
+}

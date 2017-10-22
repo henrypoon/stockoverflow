@@ -5,17 +5,35 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './TradeModal.css';
 
+const bounce = {
+  height: '30vh',
+};
+
 @connect((store) => {
   return store;
 })
 export default class TradeModal extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       quantity: 0,
       balance: this.props.user.balance
     };
-  }  
+  }
+
+  handleAdd = () => {
+    this.setState({
+      quantity: this.state.quantity + 1,
+      balance: this.props.tradeMode === 'buy' ? Math.round(this.state.balance - this.props.search.price, 2): Math.round(this.state.balance + this.props.search.price, 2)
+    });
+  }
+
+  handleRemove = () => {
+    this.setState({
+      quantity: this.state.quantity - 1,
+      balance: this.props.tradeMode === 'buy' ? Math.round(this.state.balance + this.props.search.price, 2): Math.round(this.state.balance - this.props.search.price, 2)
+    });
+  }
 
   componentDidMount() {
     this.setState({
@@ -24,30 +42,18 @@ export default class TradeModal extends Component {
     });
   }
 
-  handleAdd = () => {
-    this.setState({ 
-      quantity: this.state.quantity + 1,
-      balance: this.props.tradeMode === 'buy' ? Math.round(this.state.balance - this.props.search.price, 2): Math.round(this.state.balance + this.props.search.price, 2)
-    });
-  }
-  
-  handleRemove = () => {
-    this.setState({ 
-      quantity: this.state.quantity - 1,
-      balance: this.props.tradeMode === 'buy' ? Math.round(this.state.balance + this.props.search.price, 2): Math.round(this.state.balance - this.props.search.price, 2)
-    });
-  }
+  close = () => this.setState({ open: false })
 
   render() {
     return (
       <div>
-        <Modal size='large' open={this.props.isOpen} onClose={this.props.setClose}>
+        <Modal size='small' open={this.props.isOpen} onClose={this.props.setClose} style={bounce}>
           <Modal.Header>
             Trade Board
           </Modal.Header>
           <Modal.Content>
             <p>Are you going to buy this stock</p>
-            <div className='center'>
+            <div>
               <Statistic>
                 <Statistic.Label>Price per stock</Statistic.Label>
                 <Statistic.Value>${this.props.search.price}</Statistic.Value>
@@ -60,7 +66,7 @@ export default class TradeModal extends Component {
                 <Statistic.Label>Quantity</Statistic.Label>
                 <Statistic.Value>{this.state.quantity}</Statistic.Value>
               </Statistic>
-              {this.props.tradeMode === 'buy' ? (
+              { this.props.tradeMode === 'buy' ? (
                 <Button.Group>
                   <Button disabled={this.state.quantity === 0} icon='minus' onClick={this.handleRemove} />
                   <Button disabled={this.state.balance - this.props.search.price < 0} icon='plus' onClick={this.handleAdd} />
