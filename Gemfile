@@ -7,6 +7,8 @@ end
 
 gem 'delayed_job_active_record'
 
+gem 'thin'
+
 gem 'pundit'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
