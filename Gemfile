@@ -5,9 +5,13 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+ruby "ruby 2.4.0"
+
 gem 'delayed_job_active_record'
 
 gem 'thin'
+
+gem 'foreman'
 
 gem 'pundit'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
