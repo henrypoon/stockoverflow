@@ -29,7 +29,7 @@ export default class StockChart extends Component {
           <Table.Body>
           {this.props.records.map((e, i) => (
             <Table.Row key={i}>
-              <Table.Cell>{e.mode}</Table.Cell>
+              <Table.Cell>{e.mode == 'buy' ? 'Buy' : 'Sell'}</Table.Cell>
               <Table.Cell>{e.stockID}</Table.Cell>
               <Table.Cell>{e.quantity}</Table.Cell>
             </Table.Row>

@@ -30,7 +30,6 @@ export function buy(stockID, remainBalance, quantity) {
 
 export function setCurrPrice(stockID, price) {
 	return (dispatch, store) => {
-		console.log(store().user.hold);
 		dispatch({
 			type: 'SET_PRICE',
 			price: price,

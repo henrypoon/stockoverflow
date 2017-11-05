@@ -17,36 +17,55 @@ export default class SearchStock extends Component {
     this.state = {
       results: [],
       value: '',
-      found: false
+      found: false,
+      source: []
     };
   }
 
   componentWillMount() {
+    this.init();
     this.resetComponent();
+  }
+
+  init = () => {
+    axios.get('https://sandbox.tradier.com/v1/markets/search?q=' + this.state.value, {
+      headers: {
+        Accept: 'application/json',
+        Authorization: 'Bearer pxibpJik4b0nxFtuXcuXcpPMcJ0A'
+      }
+    })
+    .then((response) => {
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }
 
   resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
 
-  handleResultSelect = (e, { result }) => this.props.history.push(`/stock/${result.title}`);
+  handleResultSelect = (e, { result }) => this.props.history.push(`/stock/${result.price}`);
 
   handleSearchChange = (e, { value }) => {
     this.setState({ isLoading: true, value });
-
-    const source = [];
-
-    axios.get(url + this.state.value, {
-      auth: {
-        username: username,
-        password: password
+    axios.get('https://sandbox.tradier.com/v1/markets/search?q=' + this.state.value, {
+      headers: {
+        Accept: 'application/json',
+        Authorization: 'Bearer pxibpJik4b0nxFtuXcuXcpPMcJ0A'
       }
     })
     .then((response) => {
-      if (response.data.data.length > 0) {
-        source.push({
-          title: this.state.value,
-          price: '$' + response.data.data[0].open
+        var temp = [];
+        response.data.securities.security.map((e, i) => {
+          if (i < 10) {
+            temp.push({
+              title: e.description,
+              price: e.symbol
+            });
+          }
         });
-      }
+        this.setState({
+          source: temp
+        });
     })
     .catch((err) => {
       console.log(err);
@@ -54,11 +73,9 @@ export default class SearchStock extends Component {
 
     setTimeout(() => {
       if (this.state.value.length < 1) return this.resetComponent();
-      const re = new RegExp(_.escapeRegExp(this.state.value), 'i');
-      const isMatch = result => re.test(result.title);
       this.setState({
         isLoading: false,
-        results: _.filter(source, isMatch),
+        results: this.state.source,
       });
     }, 500);
   }

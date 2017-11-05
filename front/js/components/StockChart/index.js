@@ -7,10 +7,6 @@ import charts from 'fusioncharts/fusioncharts.charts';
 import PropTypes from 'prop-types';
 import { setCurrPrice } from '../../actions/tradeActions';
 
-const username = '3d66283476b5f3bfba55a40f7b30ec6c';
-const password = '9320fc2b49b41cdbe5a7672d3e5563ec';
-const url = 'https://api.intrinio.com/prices?identifier=';
-
 @connect((store) => {
 	return {
 		balance: store.user.balance
@@ -21,41 +17,61 @@ export default class StockChart extends Component {
 		super(props);
 		this.state = {
 			stockList: '',
-			data: {}
+			data: {},
+			description: ''
 		};
-		console.log(this.props);
 	}
 
 	componentWillMount() {
+		this.getDes();
 		this.getStock();
 	}
 
-	getStock() {
-		console.log(url + this.props.stockID);
-		axios.get(url + this.props.stockID, {
-			auth: {
-				username: username,
-				password: password
+	getDes() {
+		axios.get('https://sandbox.tradier.com/v1/markets/lookup?q=' + this.props.stockID, {
+			headers: {
+				Accept: 'application/json',
+				Authorization: 'Bearer pxibpJik4b0nxFtuXcuXcpPMcJ0A'
 			}
 		})
 		.then((response) => {
-			console.log(response);
-			this.props.dispatch(setCurrPrice(this.props.stockID, response.data.data[0].open));
-			const category = response.data.data.reverse().map((e) => {
+			this.setState({
+				description: response.data.securities.security.description || response.data.securities.security[0].description
+			});
+		})
+		.catch((error) => {
+			console.log(error);
+		});
+	}
+
+	getStock() {
+		axios.get('https://sandbox.tradier.com/v1/markets/history?symbol=' + this.props.stockID + '&interval=weekly', {
+			headers: {
+				Accept: 'application/json',
+				Authorization: 'Bearer pxibpJik4b0nxFtuXcuXcpPMcJ0A'
+			}
+		})
+		.then((response) => {
+			this.props.dispatch(setCurrPrice(this.props.stockID, response.data.history.day[0].open));
+			const category = response.data.history.day.map((e) => {
 				return {'label': e.date.replace('2017-', '')};
 			});
 			let categories = [];
 			categories.push({'category': category});
 			// console.log(categories);
-			const data = response.data.data.reverse().map((e) => {
+			const data = response.data.history.day.map((e) => {
 				return {'value': e.open.toString()};
 			});
 			let dataset = [];
 			let obj = {'seriesname': 'Price(In USD)','renderas': 'area', 'showvalues': '0', 'data':data };
 			dataset.push(obj);
+
+			const max = response.data.history.day[0].open*1.5;
+			const min = response.data.history.day[0].open*0.5;
+			const des = this.state.description;
 			this.setState({
-				data: {'charts': {
-					'caption': 'Apple Inc. (AAPL)',
+				data: {'chart': {
+					'caption': des,
 					'subcaption': 'NasdaqGS - NasdaqGS Delayed Price.',
 					'xaxisname': 'Date',
 					'yaxisname': 'Amount (In USD)',
@@ -72,10 +88,10 @@ export default class StockChart extends Component {
 	render() {
 		charts(fusioncharts);
 		var props_multi_chart = {
-			id: 'multi_chart',
-			type: 'mscombi2d',
+			id: 'msline_chart',
+			type: 'msline',
 			width: '100%',
-			height: '20%',
+			height: '80%',
 			dataFormat: 'json',
 			dataSource: this.state.data
 		};

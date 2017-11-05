@@ -5,6 +5,7 @@ import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Main from './containers/Main';
 import store from './store';
+require('offline-plugin/runtime').install();
 
 const app = document.getElementById('app');
 

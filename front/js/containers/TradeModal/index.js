@@ -5,8 +5,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './TradeModal.css';
 
-const bounce = {
-  height: '30vh',
+const modal = {
+  height: '40%',
+  fontSize: '100%',
 };
 
 @connect((store) => {
@@ -46,14 +47,13 @@ export default class TradeModal extends Component {
 
   render() {
     return (
-      <div>
-        <Modal size='small' open={this.props.isOpen} onClose={this.props.setClose} style={bounce}>
+        <Modal size='small' open={this.props.isOpen} onClose={this.props.setClose} style={modal}>
           <Modal.Header>
             Trade Board
           </Modal.Header>
           <Modal.Content>
-            <p>Are you going to buy this stock</p>
-            <div>
+            <p>Are you going to {this.props.tradeMode} this stock</p>
+            <div style={{textAlign: 'center'}}>
               <Statistic>
                 <Statistic.Label>Price per stock</Statistic.Label>
                 <Statistic.Value>${this.props.search.price}</Statistic.Value>
@@ -62,6 +62,7 @@ export default class TradeModal extends Component {
                 <Statistic.Label>Remain Balance</Statistic.Label>
                 <Statistic.Value>${this.state.balance}</Statistic.Value>
               </Statistic>
+              <div>
               <Statistic>
                 <Statistic.Label>Quantity</Statistic.Label>
                 <Statistic.Value>{this.state.quantity}</Statistic.Value>
@@ -74,10 +75,11 @@ export default class TradeModal extends Component {
                 ) : (
                   <Button.Group>
                     <Button disabled={this.state.quantity === 0} icon='minus' onClick={this.handleRemove} />
-                    <Button disabled={!this.props.user.hold[this.props.stockID] || this.props.user.hold[this.props.stockID] === 0 } icon='plus' onClick={this.handleAdd} />
+                    <Button disabled={!this.props.user.hold[this.props.stockID] || this.props.user.hold[this.props.stockID] === this.state.quantity } icon='plus' onClick={this.handleAdd} />
                   </Button.Group>
                 )
               }
+              </div>
             </div>
           </Modal.Content>
           <Modal.Actions>
@@ -109,7 +111,6 @@ export default class TradeModal extends Component {
             }}/>
           </Modal.Actions>
         </Modal>
-      </div>
     );
   }
 }

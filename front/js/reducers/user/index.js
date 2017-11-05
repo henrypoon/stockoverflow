@@ -1,7 +1,7 @@
 const default_state = {
   balance: 10000,
   record: [],
-  hold: {'AAPL': 50},
+  hold: {},
 };
 
 export default function reducer(state = default_state, action) {

@@ -10,11 +10,12 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./node_modules/webpack/bin/webpack.js --progress --colors",
+    "webpack": "./node_modules/webpack/bin/webpack.js --progress --colors",
     "webpack-watch": "./node_modules/webpack/bin/webpack.js --progress --colors --watch",
+    "build": "cross-env NODE_ENV=production webpack --config internals/webpack/webpack.prod.babel.js --color -p --progress --hide-modules --display-optimization-bailout",
     "webpack-production": "./node_modules/webpack/bin/webpack.js --colors --config webpack.config.prod",
-    "webpack:deploy": "webpack --config=webpack/webpack.config.js -p"
+    "webpack:deploy": "webpack --config=webpack/webpack.config.js -p",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "private": true,
   "dependencies": {
@@ -27,8 +28,10 @@
     "faker": "^4.1.0",
     "fusioncharts": "^3.12.2",
     "google-finance": "^0.1.10",
+    "html-webpack-plugin": "^2.30.1",
     "lodash": "^4.17.4",
     "moment": "^2.19.1",
+    "offline-plugin": "^4.8.4",
     "prop-types": "^15.6.0",
     "radium": "^0.19.5",
     "react": "^16.0.0",
@@ -59,11 +62,14 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
+    "cross-env": "^5.1.1",
     "css-loader": "^0.28.7",
     "eslint": "^3.19.0",
     "eslint-loader": "^1.9.0",
     "eslint-plugin-react": "^7.4.0",
+    "exports-loader": "^0.6.4",
     "extract-text-webpack-plugin": "^3.0.0",
+    "html-loader": "^0.5.1",
     "node-sass": "^4.5.3",
     "react-svg-loader": "^2.1.0",
     "redux-logger": "^3.0.6",
