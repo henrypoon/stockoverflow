@@ -31,3 +31,6 @@ Builds the assets for development mode, and rebuilds on every detected change.
 
 `npm run webpack-production`  
 Builds the assets for production mode, output files are hashed.
+
+## DEME
+http://stockoverflow.s3-website-ap-southeast-2.amazonaws.com/
